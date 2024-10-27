@@ -1,5 +1,4 @@
-![Test Workflow](https://github.com/github/docs/actions/workflows/test_pip.yaml/badge.svg)
-
+![Test Workflow](https://github.com/jeffwigger/FastDynamicBatcher/actions/workflows/test_pip.yaml/badge.svg)
 
 # Fast Dynamic Batcher
 
