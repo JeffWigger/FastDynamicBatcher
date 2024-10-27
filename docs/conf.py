@@ -15,7 +15,7 @@ sys.path.insert(0, os.path.abspath("../"))
 # sys.path.insert(0, os.path.abspath(os.path.join('..', '..')))
 
 project = "Fast Dynamic Batcher"
-copyright = "2025, Jeffrey Wigger"
+copyright = "2024, Jeffrey Wigger"
 author = "Jeffrey Wigger"
 release = "0.1.1"
 
@@ -31,6 +31,5 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-# html_theme = 'alabaster'
 html_theme = "sphinx_rtd_theme"
 html_static_path = ["_static"]

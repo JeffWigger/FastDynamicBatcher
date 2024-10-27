@@ -3,14 +3,25 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+.. include:: ../README.rst
+
+
 Welcome to Fast Dynamic Batcher's documentation!
 ================================================
+
+**Fast Dynamic Batcher** is a Python library
+
+Find a complete example of how to use the project in the :doc:`example` section.
+The Library Documentation can be found at :doc:`modules`.
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   source/modules
+   Home <self>
+   modules
+   example
+
 
 
 
@@ -18,5 +29,6 @@ Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+
+..
+   * :ref:`modindex` current not working correctly
