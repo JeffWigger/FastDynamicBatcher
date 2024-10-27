@@ -19,6 +19,8 @@ except RuntimeError:
 
 
 class DynBatcher:
+    """The DynBatcher class is used to batch inputs across many requests into a single batch to accelerate ML workloads."""
+
     def __init__(
         self,
         inference_model: InferenceModel,
@@ -70,6 +72,9 @@ class DynBatcher:
         self.logger.info("Output thread started")
 
     def stop(self):
+        """
+        Stops all processes and threads created by the DynBatcher.
+        """
         self._input_queue.close()
         self._output_queue.close()
         self.event.set()  # joins self.thread
@@ -79,6 +84,14 @@ class DynBatcher:
         # TODO: Terminate if join not working
 
     async def process_batched(self, input: t.Any) -> t.Any:
+        """
+        Process an input as a batch.
+
+        :param input: The input which will be passed to the `infer` of the registered Inference Model as the content of a Task.
+        :type input: t.Any
+        :return: The output of the `infer` method.
+        :rtype: t.Any
+        """
         result = await asyncio.to_thread(self._process_batched, input)
         return result
 
