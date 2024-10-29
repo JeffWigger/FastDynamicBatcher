@@ -31,8 +31,8 @@ class DynBatcher:
         """
         Initializes the Dynamic Batcher.
 
-        :param func: Function that is called to process the batch
-        :type func: t.Callable[[list[Task]], list[Task]]
+        :param inference_model: Implementation of the abstract InferenceModel class
+        :type inference_model: InferenceModel
         :param max_batch_size: The maximal number of inputs that are processed together, defaults to 8
         :type max_batch_size: int, optional
         :param max_delay: The maximal delay between receiving the first input and the start of the batch processing, defaults to 0.1
@@ -87,9 +87,9 @@ class DynBatcher:
         """
         Process an input as a batch.
 
-        :param input: The input which will be passed to the `infer` of the registered Inference Model as the content of a Task.
+        :param input: The input which will be passed to the `infer` of the registered InferenceModel as the content of a Task.
         :type input: t.Any
-        :return: The output of the `infer` method.
+        :return: The output of the InferenceModel's `infer` method.
         :rtype: t.Any
         """
         result = await asyncio.to_thread(self._process_batched, input)

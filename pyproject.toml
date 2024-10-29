@@ -5,10 +5,14 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry]
 name = "fast_dynamic_batcher"
 version = "0.1.1"
-description = ""
+description = "FastDynamicBatcher is a library for batching inputs across requests to accelerate machine learning workloads."
 authors = ["Jeffrey Wigger"]
 readme = "README.md"
 license = "MIT"
+repository = "https://github.com/JeffWigger/FastDynamicBatcher"
+homepage = "https://github.com/JeffWigger/FastDynamicBatcher"
+keywords = ["machine-learning", "batching"]
+# documentation = "https://python-poetry.org/docs/"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "~0.4.10"

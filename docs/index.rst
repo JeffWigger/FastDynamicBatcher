@@ -3,30 +3,26 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-.. include:: ../README.rst
-
-
 Welcome to Fast Dynamic Batcher's documentation!
 ================================================
 
-**Fast Dynamic Batcher** is a Python library
+.. include:: ../README.rst
 
-Find a complete example of how to use the project in the :doc:`example` section.
-The Library Documentation can be found at :doc:`modules`.
+Complete FastAPI Implementation Example
+---------------------------------------
+
+You can find a full example of how to integrate Fast Dynamic Batcher into your FastAPI project at our `GitHub repository <https://github.com/JeffWigger/FastDynamicBatcher/tree/main/example_fastapi>`_.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Contents
 
    Home <self>
    modules
-   example
 
 
-
-
-Indices and tables
-==================
+Index
+-----
 
 * :ref:`genindex`
 
