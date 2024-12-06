@@ -1,11 +1,12 @@
 import time
 
+from typing import Any
+
 import torch
 
 from torchvision import models
 from torchvision.models import ResNet101_Weights
 
-from fast_dynamic_batcher.dyn_batcher import Task
 from fast_dynamic_batcher.inference_template import InferenceModel
 
 
@@ -20,18 +21,15 @@ class ResnetModel(InferenceModel):
         print(self.device)
         self.resnet.to(self.device)
 
-    def infer(self, tasks: list[Task]) -> list[Task]:
-        print(len(tasks))
+    def infer(self, inputs: list[Any]) -> list[Any]:
+        print(len(inputs))
         start_s = time.time()
-        inputs = [t.content for t in tasks]
         input_vec = torch.cat(inputs, dim=0)
         with torch.no_grad():
             input_vec = input_vec.to(self.device)
             self.resnet.to(self.device)
             output = self.resnet(input_vec)
         processed = torch.topk(self.smax(output), 1)
-        return_values = [
-            Task(id=tasks[i].id, content=(processed[0][i].item(), processed[1][i].item())) for i in range(len(tasks))
-        ]
+        return_values = [(processed[0][i].item(), processed[1][i].item()) for i in range(len(inputs))]
         print(f"Execution of single batch took {time.time() - start_s} seconds.")
         return return_values

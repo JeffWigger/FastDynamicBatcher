@@ -12,7 +12,7 @@ license = "MIT"
 repository = "https://github.com/JeffWigger/FastDynamicBatcher"
 homepage = "https://github.com/JeffWigger/FastDynamicBatcher"
 keywords = ["machine-learning", "batching"]
-# documentation = "https://python-poetry.org/docs/"
+documentation = "https://fastdynamicbatcher.readthedocs.io/en/latest/"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "~0.4.10"

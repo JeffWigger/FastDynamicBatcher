@@ -5,7 +5,7 @@
 Fast Dynamic Batcher
 ====================
 
-The bundling of several machine learning model inputs into a single larger input is the simplest way to achieve
+Bundling several ML model inputs into a larger batch is the simplest way to achieve
 significant inference speed-ups in ML workloads. The **Fast Dynamic Batcher** library has
 been built to make it easy to use such dynamic batches in Python web frameworks like FastAPI. With our
 dynamic batcher, you can combine the inputs of several requests into a
@@ -20,7 +20,7 @@ model in its ``init`` method and use it in its ``infer`` method:
 
 .. code-block:: python
 
-   from fast_dynamic_batcher.dyn_batcher import Task
+   from typing import Any
    from fast_dynamic_batcher.inference_template import InferenceModel
 
 
@@ -29,15 +29,10 @@ model in its ``init`` method and use it in its ``infer`` method:
           super().__init__()
           # Initiate your ML model here
 
-      def infer(self, tasks: list[Task]) -> list[Task]:
-          # Process your input tasks
-          inputs = [t.content for t in tasks]
+      def infer(self, inputs: list[Any]) -> list[Any]:
           # Run your inputs as a batch for your model
-          ml_output = None # Your inference outputs
-          results = [
-              Task(id=tasks[i].id, content=ml_output[i]) for i in range(len(tasks))
-          ]
-          return results
+          ml_output = ... # Your inference outputs
+          return ml_output
 
 Subsequently, use your ``InferenceModel`` instance to initiate our
 ``DynBatcher``:

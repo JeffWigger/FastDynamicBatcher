@@ -8,6 +8,7 @@ from ctypes import c_bool
 from threading import Event, Lock, Thread
 
 from fast_dynamic_batcher.dyn_prog_loop import _main_loop, _return_loop
+from fast_dynamic_batcher.errors import DynamicBatchIndexError
 from fast_dynamic_batcher.inference_template import InferenceModel
 from fast_dynamic_batcher.models import Task
 
@@ -89,10 +90,13 @@ class DynBatcher:
 
         :param input: The input which will be passed to the `infer` of the registered InferenceModel as the content of a Task.
         :type input: t.Any
+        :raises DynamicBatchIndexError: Error raised when something went wrong during batch processing.
         :return: The output of the InferenceModel's `infer` method.
         :rtype: t.Any
         """
         result = await asyncio.to_thread(self._process_batched, input)
+        if isinstance(result, DynamicBatchIndexError):
+            raise result
         return result
 
     def _process_batched(self, input: t.Any) -> t.Any:
