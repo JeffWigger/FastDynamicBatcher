@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
-
-from fast_dynamic_batcher.models import Task
+from typing import Any
 
 
 class InferenceModel(ABC):
@@ -13,14 +12,14 @@ class InferenceModel(ABC):
     """
 
     @abstractmethod
-    def infer(self, tasks: list[Task]) -> list[Task]:
+    def infer(self, inputs: list[Any]) -> list[Any]:
         """
-        Abstract method that is used by the DynBatcher to process a batch of inputs. Use the tasks to create a batch for your machine learning model.
+        Abstract method that is used by the DynBatcher to process a batch of inputs.
 
 
-        :param tasks: A list of Tasks. The content of each task contains the input passed to the DynBatcher for batch processing.
-        :type tasks: list[Task]
-        :return: The outputs of the machine learning model as a list of tasks. The tasks should have the same ids as the inputs and the content of the task should be the processed content of the corresponding input task.
-        :rtype: list[Task]
+        :param inputs: A list of inputs your model can run as a single batch.
+        :type inputs: list[Any]
+        :return: The outputs of the machine learning model. The position of an output should correspond to the position of the input used to produce it.
+        :rtype: list[Any]
         """
         ...

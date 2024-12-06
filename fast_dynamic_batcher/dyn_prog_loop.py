@@ -4,7 +4,9 @@ from asyncio import Future
 from multiprocessing import Queue, Value
 from threading import Event, Lock
 
+from fast_dynamic_batcher.errors import DynamicBatchIndexError
 from fast_dynamic_batcher.inference_template import InferenceModel
+from fast_dynamic_batcher.models import Task
 
 
 # TODO: Bound exp. backoff
@@ -39,8 +41,21 @@ def _main_loop(
             batch_list.append(input)
         if len(batch_list) == max_batch_size or start_time + max_delay_ns < time.monotonic_ns():
             no_op = False
-            outputs = inference_model.infer(batch_list)
-            for output in outputs:
+            inputs = [t.content for t in batch_list]
+            outputs = inference_model.infer(inputs)
+            if len(outputs) != len(inputs):
+                output_tasks = [
+                    Task(
+                        id=batch_list[i].id,
+                        content=DynamicBatchIndexError(
+                            f"Dynamic batch of input size {len(batch_list)} produced {len(outputs)}."
+                        ),
+                    )
+                    for i in range(len(batch_list))
+                ]
+            else:
+                output_tasks = [Task(id=batch_list[i].id, content=outputs[i]) for i in range(len(batch_list))]
+            for output in output_tasks:
                 output_queue.put(output)
             batch_list = []
         if no_op:

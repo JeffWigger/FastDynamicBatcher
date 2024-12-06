@@ -1,6 +1,7 @@
 import time
 
 from contextlib import asynccontextmanager
+from typing import Any
 
 import pytest
 
@@ -11,16 +12,23 @@ from pydantic import BaseModel
 
 from fast_dynamic_batcher.dyn_batcher import DynBatcher
 from fast_dynamic_batcher.inference_template import InferenceModel
-from fast_dynamic_batcher.models import Task
 
 
 class TestModel(InferenceModel):
     def __init__(self):
         super().__init__()
 
-    def infer(self, tasks: list[Task]) -> list[Task]:
+    def infer(self, inputs: list[Any]) -> list[Any]:
         time.sleep(0.05)
-        return tasks
+        return inputs
+
+
+class ErrorTestModel(InferenceModel):
+    def __init__(self):
+        super().__init__()
+
+    def infer(self, inputs: list[Any]) -> list[Any]:
+        return inputs[0:-1]
 
 
 class Input(BaseModel):
@@ -50,3 +58,10 @@ def wrapped_app():
 
     yield app
     # dyn_batcher.stop()
+
+
+@pytest.fixture
+def dyn_batcher():
+    dyn_batcher = DynBatcher(ErrorTestModel, 8)
+    yield dyn_batcher
+    dyn_batcher.stop()
