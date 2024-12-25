@@ -106,4 +106,4 @@ The experiments were conducted by using this `testing script <https://github.com
      - 117.10s
      - 88.47s
 
-On GPUs, which benefit greatly from large batch sizes, we achieved a speed-up of almost 2.5x by creating dynamic batches of size 16. On, CPUs, the gains are more modest with a speed-up of 1.3x.
+On GPUs, which benefit greatly from large batch sizes, we achieved a speed-up of almost 2.5x by creating dynamic batches of size 16. On CPUs, the gains are more modest with a speed-up of 1.3x.
