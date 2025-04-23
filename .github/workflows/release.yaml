@@ -22,10 +22,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install uv
     - name: Get Version
+      id: version
       run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
     - name: Set Version
       env:
-        VERSION: ${{ steps.vars.outputs.tag }}
+        VERSION: ${{ steps.version.outputs.tag }}
       run: uvx --from=toml-cli toml set --toml-path=pyproject.toml project.version $VERSION
     - name: Build
       run: uv build
