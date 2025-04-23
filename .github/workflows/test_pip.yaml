@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         platform: [ubuntu-latest]
-        python-version: ["3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
 
     runs-on: ${{ matrix.platform }}
 
@@ -26,5 +26,9 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install uv
+    - name: Create Venv
+      run: uv venv
+    - name: Install Library
+      run: uv pip install .
     - name: Test
-      run: uv run pytest -vv .
+      run: uv run pytest -vv -s .
