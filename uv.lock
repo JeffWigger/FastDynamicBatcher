@@ -71,7 +71,7 @@ wheels = [
 
 [[package]]
 name = "fast-dynamic-batcher"
-version = "1.0.1"
+version = "0.0.0.dev1"
 source = { virtual = "." }
 
 [package.dev-dependencies]

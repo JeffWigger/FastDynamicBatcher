@@ -1,6 +1,6 @@
 [project]
 name = "fast_dynamic_batcher"
-version = "1.0.1"
+version = "0.0.0.dev1"
 description = "FastDynamicBatcher is a library for batching inputs across requests to accelerate machine learning workloads."
 authors = [{name = "Jeffrey Wigger"}]
 readme = "README.rst"
